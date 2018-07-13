@@ -2,10 +2,18 @@
 
 1. Put frozen models into `./frozen` directory
 2. Add serving information in `export_serving_model.py`
+    - Set update messages `UPDATE_MESSAGE`
     - Define a export function
     - Put `@ServingInfo.export` decorator on export function(**if not, then this model will not export**)
 3. Run `export_serving_model.py`
 4. Copy the serving model `./serving/{version}` to your serving model directory on the server
+
+## Note
+
+Run script `export_serving_model.py` will **automaticly** generate(or modify) two files under directory `./serving`:
+
+- `current_version`: Stores the current version and update information. See [details](./serving/README.md).
+- `exported_models`: Exported models, one model for one line.
 
 ## Test
 

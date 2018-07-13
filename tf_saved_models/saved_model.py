@@ -9,7 +9,9 @@ from os.path import join as pjoin
 from abc import ABC
 
 
-_MODELS_TO_EXPORT = [] # global model info list
+_MODELS_TO_EXPORT     = [] # global model info list
+_VERSION_FILE         = 'current_version'
+_EXPORTED_MODELS_FILE = 'exported_models'
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -298,7 +300,7 @@ def freezing_model(model_dir, output_node_names, output_dir=None, name=None):
 
   return output_path
 
-def check_model_version(export_dir, verbose=False):
+def check_model_version_from_dir(export_dir, verbose=False):
   assert os.path.exists(export_dir), "Not exists: {}".format(
     export_dir)
   versions = [int(d) for d in os.listdir(export_dir)
@@ -306,6 +308,56 @@ def check_model_version(export_dir, verbose=False):
   cur_ver = max(versions) if len(versions) > 0 else 0
   if verbose:
     tf.logging.info('Previous model versions: {}'.format(versions))
+    tf.logging.info('Current model version: {}'.format(cur_ver))
+  return (cur_ver + 1)
+
+def check_model_version_from_file(export_dir,
+  version_filename=_VERSION_FILE,
+  exported_models_filename=_EXPORTED_MODELS_FILE,
+  update_message=None,
+  verbose=False):
+  def _prepend(fhandle, content):
+    fhandle.seek(0)
+    fhandle.write(content)
+    fhandle.truncate() # 清空后面的部分
+
+  def _check_exported_models():
+    signature_name_list = [serving_info.signature_name for serving_info in _MODELS_TO_EXPORT]
+    signature_name_list_str = '\n'.join(signature_name_list)
+    exported_models_file = pjoin(export_dir, exported_models_filename)
+    if not os.path.exists(exported_models_file):
+      with open(exported_models_file, 'w', encoding='utf-8') as ef:
+        ef.write(signature_name_list_str)
+        return ','.join(signature_name_list)
+    else:
+      with open(exported_models_file, 'r+', encoding='utf-8') as ef:
+        old_signature_name_list = ef.read().split('\n')
+        newly_signature_name_list = [item for item in signature_name_list \
+          if item not in old_signature_name_list]
+        if len(newly_signature_name_list) > 0:
+          _prepend(ef, signature_name_list_str)
+        return ','.join(newly_signature_name_list)
+
+  assert os.path.exists(export_dir), "Not exists: {}".format(
+    export_dir)
+  cur_ver = 0
+  version_file = pjoin(export_dir, version_filename)
+  newly_models = _check_exported_models()
+  if not os.path.exists(version_file):
+    with open(version_file, 'w', encoding='utf-8') as vf:
+      new_line = '{version}\t{newly_models}\t"{msg}"\n'.format(version=(cur_ver+1),
+        newly_models=newly_models, msg=update_message)
+      vf.write(new_line)
+  else:
+    with open(version_file, 'r+', encoding='utf-8') as vf:
+      old_content = vf.read()
+      vf.seek(0)
+      first_line_contents = vf.readline().strip('\n').split('\t')
+      cur_ver = int(first_line_contents[0])
+      new_line = '{version}\t{newly_models}\t"{msg}"\n'.format(version=(cur_ver+1),
+        newly_models=newly_models, msg=update_message)
+      _prepend(vf, new_line+old_content)
+  if verbose:
     tf.logging.info('Current model version: {}'.format(cur_ver))
   return (cur_ver + 1)
 
