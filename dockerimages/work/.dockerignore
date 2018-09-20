@@ -1,0 +1,4 @@
+web/**/logs/*
+web/**/tests/
+web/**/__pycache__/
+web/*.pyc
