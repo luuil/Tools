@@ -19,14 +19,16 @@ WORKDIR /root
 
 # ADD files to /root
 ADD .ssh .ssh
-COPY .bashrc .
 COPY .bash_profile .
 
 # Make sure the files are not readable for other users/groups.
 RUN chmod 600 .ssh/Identity .ssh/Identity.pub
 
-# ADD ssh-dss, forward support ro openssh-client, because of the `Identity` is type of ssh-dss.
+# append keychain support to bashrc
 # sed -i '$a <content>' file: means append contents to file in-place.
+RUN sed -i '$a \n# ssh keychain\neval `keychain --eval ~/.ssh/Identity`' .bashrc
+
+# ADD ssh-dss, forward support ro openssh-client, because of the `Identity` is type of ssh-dss.
 RUN sed -i '$a PubkeyAcceptedKeyTypes=+ssh-dss' /etc/ssh/ssh_config
 RUN sed -i '$a ForwardAgent yes' /etc/ssh/ssh_config
 
