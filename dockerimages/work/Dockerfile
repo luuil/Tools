@@ -3,19 +3,28 @@
 # Use an official Ubuntu as a parent image
 FROM ubuntu:latest
 
+# Set the working directory to /root
+WORKDIR /root
+
+
+# =========================Service SUPPORT===================================
+
 # Clears out the local repository of retrieved package files.
 # And then, downloads the package lists from the repositories and "updates" them to get
 # information on the newest versions of packages and their dependencies.
 RUN apt-get clean && apt-get -y update
 
-# Install nano, openssh, keychain
+# Install nano, openssh, keychain, sudo
 # RUN apt-get install -y openssh-server
 RUN apt-get install -y openssh-client
 RUN apt-get install -y keychain
 RUN apt-get install -y nano
+RUN apt-get install -y sudo
 
-# Set the working directory to /root
-WORKDIR /root
+RUN rm -rf /var/lib/apt/lists/*
+
+
+# =========================SSH SUPPORT===================================
 
 # ADD files to /root
 ADD .ssh .ssh
@@ -34,3 +43,11 @@ RUN sed -i '$a ForwardAgent yes' /etc/ssh/ssh_config
 
 # ADD ssh-dss support ro openssh-server
 # RUN sed -i '$a PubkeyAcceptedKeyTypes=+ssh-dss' /etc/ssh/sshd_config
+
+
+# =========================ALIAS SUPPORT===================================
+
+COPY .sh/.bash_aliases .
+COPY .sh/docker.sh .
+
+RUN /bin/bash -c "source .bash_aliases"
