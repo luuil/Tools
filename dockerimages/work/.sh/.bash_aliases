@@ -48,8 +48,8 @@ alias hex='printf "%x\n"'
 alias grepi='grep --ignore-case'
 alias wget='wget --no-check-certificate'
 alias py=python
+alias dk='~/docker.sh'
 alias q=exit
-alias d='~/docker.sh'
 alias n=nvidia-smi
 alias wn='watch nvidia-smi'
 

@@ -47,6 +47,7 @@ RUN sed -i '$a ForwardAgent yes' /etc/ssh/ssh_config
 
 # =========================ALIAS SUPPORT===================================
 
+ADD .sh .sh
 COPY .sh/.bash_aliases .
 COPY .sh/docker.sh .
 

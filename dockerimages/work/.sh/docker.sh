@@ -14,7 +14,12 @@ then
   usage
 elif [ "$1" = "p" -o "$1" = "ps" ]
 then
-  sudo docker ps
+  if [ $# -ge 2 ]
+  then
+    sudo docker ps "$2"
+  else
+    sudo docker ps
+  fi
 elif [ "$1" = "a" -o "$1" = "attach" ]
 then
   sudo docker exec -i -t $2 /bin/bash
@@ -29,12 +34,12 @@ then
   sudo docker logs $2
 elif [ "$1" = 't' -o "$1" = "tail_logs" ]
 then
-  sudo tail -f `sudo docker inspect --format='{{.LogPath}}' $2`
+  tail -f `sudo docker inspect --format='{{.LogPath}}' $2`
 elif [ "$1" = 'i' -o "$1" = "inspect" ]
 then
   sudo docker inspect --format='{{.LogPath}}' $2
 else
-  usage
-  exit 1
+  # all arguments except the first one (in a bash script)
+  sudo docker "${@:1}"
 fi
 exit 0
