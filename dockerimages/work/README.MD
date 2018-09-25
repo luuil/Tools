@@ -6,10 +6,16 @@
 docker build -t luuil:work -f ./Dockerfile .
 ```
 
-### Run the image
+### Test the image
 
 ```bash
 docker run -i -t --rm luuil:work /bin/bash
+```
+
+### Run the image
+
+```bash
+docker run --name "work" -d -i -t -v "d:/":/d  -v "e:/":/e  -v "f:/":/f luuil:work
 ```
 
 ## Detail

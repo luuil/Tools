@@ -37,6 +37,13 @@ extract () {
 }
 
 
+function go() {
+  scp -r ~/.sh $1:~/.sh
+  scp ~/.bashrc $1:/tmp/.bashrc_temp
+  ssh -t $1 "bash --rcfile /tmp/.bashrc_temp ; rm /tmp/.bashrc_temp"
+}
+
+
 function mcd() {
   mkdir -p "$1" && cd "$1";
 }
@@ -48,7 +55,7 @@ alias hex='printf "%x\n"'
 alias grepi='grep --ignore-case'
 alias wget='wget --no-check-certificate'
 alias py=python
-alias dk='~/docker.sh'
+alias dk='~/.sh/docker.sh'
 alias q=exit
 alias n=nvidia-smi
 alias wn='watch nvidia-smi'

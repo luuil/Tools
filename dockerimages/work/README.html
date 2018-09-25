@@ -1060,8 +1060,12 @@ body .markdown-body
 <div class="codehilite"><pre>docker build -t luuil:work -f ./Dockerfile .
 </pre></div>
 
-<h3 id="run-the-image">Run the image<a class="headerlink" href="#run-the-image" title="Permanent link"></a></h3>
+<h3 id="test-the-image">Test the image<a class="headerlink" href="#test-the-image" title="Permanent link"></a></h3>
 <div class="codehilite"><pre>docker run -i -t --rm luuil:work /bin/bash
+</pre></div>
+
+<h3 id="run-the-image">Run the image<a class="headerlink" href="#run-the-image" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>docker run -i -t -v <span class="s2">&quot;c:/&quot;</span>:/c -v <span class="s2">&quot;d:/&quot;</span>:/d  -v <span class="s2">&quot;e:/&quot;</span>:/e  -v <span class="s2">&quot;f:/&quot;</span>:/f luuil:work /bin/bash
 </pre></div>
 
 <h2 id="detail">Detail<a class="headerlink" href="#detail" title="Permanent link"></a></h2>
