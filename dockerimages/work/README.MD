@@ -18,6 +18,8 @@ docker run -i -t --rm luuil:work /bin/bash
 docker run --name "work" -d -i -t -v "d:/":/d  -v "e:/":/e  -v "f:/":/f luuil:work
 ```
 
+## Docker container
+
 ### Into container
 
 ```bash
@@ -35,6 +37,32 @@ docker stop work
 ```bash
 docker restart work
 ```
+
+
+## Sync alias
+
+### `go` function
+
+Defined in [`.sh/.bash_aliases`](./.sh/.bash_aliases)
+
+```bash
+go ti1
+```
+
+will 
+
+- sync `.sh` dir.
+- send `.bashrc` copy
+- ssh login remote, such as `ti1`
+
+### `.sh/sync.sh` script
+
+```bash
+bash .sh/sync.sh
+```
+
+See details in [`.sh/sync.sh`](./.sh/sync.sh)
+
 
 ## Detail
 

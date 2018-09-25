@@ -38,7 +38,7 @@ extract () {
 
 
 function go() {
-  scp -r ~/.sh $1:~/.sh
+  rsync -azP --exclude='~/.sh/sync.sh' ~/.sh/ $1:~/.sh
   scp ~/.bashrc $1:/tmp/.bashrc_temp
   ssh -t $1 "bash --rcfile /tmp/.bashrc_temp ; rm /tmp/.bashrc_temp"
 }

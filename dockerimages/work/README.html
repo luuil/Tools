@@ -1068,6 +1068,7 @@ body .markdown-body
 <div class="codehilite"><pre>docker run --name <span class="s2">&quot;work&quot;</span> -d -i -t -v <span class="s2">&quot;d:/&quot;</span>:/d  -v <span class="s2">&quot;e:/&quot;</span>:/e  -v <span class="s2">&quot;f:/&quot;</span>:/f luuil:work
 </pre></div>
 
+<h2 id="docker-container">Docker container<a class="headerlink" href="#docker-container" title="Permanent link"></a></h2>
 <h3 id="into-container">Into container<a class="headerlink" href="#into-container" title="Permanent link"></a></h3>
 <div class="codehilite"><pre>docker <span class="nb">exec</span> -i -t work //bin/bash
 </pre></div>
@@ -1080,6 +1081,23 @@ body .markdown-body
 <div class="codehilite"><pre>docker restart work
 </pre></div>
 
+<h2 id="sync-alias">Sync alias<a class="headerlink" href="#sync-alias" title="Permanent link"></a></h2>
+<h3 id="go-function"><code>go</code> function<a class="headerlink" href="#go-function" title="Permanent link"></a></h3>
+<p>Defined in <a href="///D://aMyProj/tools/dockerimages/work/.sh/.bash_aliases"><code>.sh/.bash_aliases</code></a></p>
+<div class="codehilite"><pre>go ti1
+</pre></div>
+
+<p>will </p>
+<ul>
+<li>sync <code>.sh</code> dir.</li>
+<li>send <code>.bashrc</code> copy</li>
+<li>ssh login remote, such as <code>ti1</code></li>
+</ul>
+<h3 id="shsyncsh-script"><code>.sh/sync.sh</code> script<a class="headerlink" href="#shsyncsh-script" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>bash .sh/sync.sh
+</pre></div>
+
+<p>See details in <a href="///D://aMyProj/tools/dockerimages/work/.sh/sync.sh"><code>.sh/sync.sh</code></a></p>
 <h2 id="detail">Detail<a class="headerlink" href="#detail" title="Permanent link"></a></h2>
 <h3 id="ssh-keychain">SSH Keychain<a class="headerlink" href="#ssh-keychain" title="Permanent link"></a></h3>
 <h4 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link"></a></h4>

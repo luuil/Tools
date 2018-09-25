@@ -1,12 +1,13 @@
 #!/bin/bash
 
 function sync() {
-  echo "[$1]: syncing..."
+  printf "[$1]: syncing...\n"
   rsync --exclude sync.sh -r . $1:~/.sh
   alter_or_not=`ssh $1 "cat ~/.bashrc | grep bashrc_append"`
   if [ -n "$alter_or_not" ]; then
-    echo "[$1]: synced already"
+    printf "[$1]: synced already\n\n"
   else
+    printf "[$1]: append 'source ~/.sh/.bashrc_append' to '~/.bashrc'\n\n"
     ssh $1  "echo ""source /home/\`whoami\`/.sh/.bashrc_append"" >> ~/.bashrc"
   fi
 }
