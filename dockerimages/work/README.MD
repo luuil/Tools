@@ -18,6 +18,24 @@ docker run -i -t --rm luuil:work /bin/bash
 docker run --name "work" -d -i -t -v "d:/":/d  -v "e:/":/e  -v "f:/":/f luuil:work
 ```
 
+### Into container
+
+```bash
+docker exec -i -t work //bin/bash
+```
+
+### Stop container
+
+```bash
+docker stop work
+```
+
+### Restart container
+
+```bash
+docker restart work
+```
+
 ## Detail
 
 ### SSH Keychain
