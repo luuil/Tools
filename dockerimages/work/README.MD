@@ -41,27 +41,40 @@ docker restart work
 ```
 
 
-## Sync alias
+## Sync alias and scripts with remote
 
-### `go` function
+Sync our custom `alias` or `command scripts` with remote machine we used.
 
-Defined in [`.sh/.bash_aliases`](./.sh/.bash_aliases)
+We do it in two ways as shown below.
+
+### Command `go`
 
 ```bash
-go ti1
+go <hostname>
 ```
 
 will 
 
-- sync `.sh` dir.
-- send `.bashrc` copy
-- ssh login remote, such as `ti1`
+- sync `.sh/` dir, exclude `sync.sh`.
+- send an copy of `.bashrc` to remote and store at `/tmp/.bashrc_temp`.
+- ssh login remote, run `bash` with `/tmp/.bashrc_temp`.
 
-### `.sh/sync.sh` script
+> Excute every time when use `go` command.
+
+Defined in [`.sh/.bash_aliases`](./.sh/.bash_aliases)
+
+### Script `.sh/sync.sh`
 
 ```bash
 bash .sh/sync.sh
 ```
+
+will 
+
+- sync `.sh/` dir, exclude `sync.sh`.
+- append new line `source ~/.sh/.bashrc_append` to `<remote>:~/.bashrc` file.
+
+> Excute just when run this script.
 
 See details in [`.sh/sync.sh`](./.sh/sync.sh)
 

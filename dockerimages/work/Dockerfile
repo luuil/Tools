@@ -14,7 +14,7 @@ WORKDIR /root
 # information on the newest versions of packages and their dependencies.
 RUN apt-get clean && apt-get -y update
 
-# Install nano, openssh, keychain, sudo, rsync, dos2unix
+# Install nano, openssh, keychain, sudo, rsync, dos2unix, curl
 # RUN apt-get install -y openssh-server
 RUN apt-get install -y openssh-client
 RUN apt-get install -y keychain
@@ -22,8 +22,8 @@ RUN apt-get install -y nano
 RUN apt-get install -y sudo
 RUN apt-get install -y rsync
 RUN apt-get install -y dos2unix
-
-RUN rm -rf /var/lib/apt/lists/*
+# cheat sheets repositories: https://github.com/chubin/cheat.sh
+RUN apt-get install -y curl
 
 
 # =========================SSH SUPPORT===================================
@@ -47,7 +47,7 @@ RUN sed -i '$a ForwardAgent yes' /etc/ssh/ssh_config
 # RUN sed -i '$a PubkeyAcceptedKeyTypes=+ssh-dss' /etc/ssh/sshd_config
 
 # Generate KEY
-RUN ssh-keygen -q -t rsa -N '' -C 'for work login' -f ~/.ssh/id_rsa
+RUN ssh-keygen -q -t rsa -N '' -C 'luuil@outlook.com' -f ~/.ssh/id_rsa
 
 # Copy to REMOTE
 # ssh-copy-id -f -i ~/.ssh/id_rsa.pub <remote>

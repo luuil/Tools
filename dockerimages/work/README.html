@@ -1082,22 +1082,35 @@ body .markdown-body
 <div class="codehilite"><pre>docker restart work
 </pre></div>
 
-<h2 id="sync-alias">Sync alias<a class="headerlink" href="#sync-alias" title="Permanent link"></a></h2>
-<h3 id="go-function"><code>go</code> function<a class="headerlink" href="#go-function" title="Permanent link"></a></h3>
-<p>Defined in <a href="///D://aMyProj/tools/dockerimages/work/.sh/.bash_aliases"><code>.sh/.bash_aliases</code></a></p>
-<div class="codehilite"><pre>go ti1
+<h2 id="sync-alias-and-scripts-with-remote">Sync alias and scripts with remote<a class="headerlink" href="#sync-alias-and-scripts-with-remote" title="Permanent link"></a></h2>
+<p>Sync our custom <code>alias</code> or <code>command scripts</code> with remote machine we used.</p>
+<p>We do it in two ways as shown below.</p>
+<h3 id="command-go">Command <code>go</code><a class="headerlink" href="#command-go" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>go &lt;hostname&gt;
 </pre></div>
 
 <p>will </p>
 <ul>
-<li>sync <code>.sh</code> dir.</li>
-<li>send <code>.bashrc</code> copy</li>
-<li>ssh login remote, such as <code>ti1</code></li>
+<li>sync <code>.sh/</code> dir, exclude <code>sync.sh</code>.</li>
+<li>send an copy of <code>.bashrc</code> to remote and store at <code>/tmp/.bashrc_temp</code>.</li>
+<li>ssh login remote, run <code>bash</code> with <code>/tmp/.bashrc_temp</code>.</li>
 </ul>
-<h3 id="shsyncsh-script"><code>.sh/sync.sh</code> script<a class="headerlink" href="#shsyncsh-script" title="Permanent link"></a></h3>
+<blockquote>
+<p>Excute every time when use <code>go</code> command.</p>
+</blockquote>
+<p>Defined in <a href="///D://aMyProj/tools/dockerimages/work/.sh/.bash_aliases"><code>.sh/.bash_aliases</code></a></p>
+<h3 id="script-shsyncsh">Script <code>.sh/sync.sh</code><a class="headerlink" href="#script-shsyncsh" title="Permanent link"></a></h3>
 <div class="codehilite"><pre>bash .sh/sync.sh
 </pre></div>
 
+<p>will </p>
+<ul>
+<li>sync <code>.sh/</code> dir, exclude <code>sync.sh</code>.</li>
+<li>append new line <code>source ~/.sh/.bashrc_append</code> to <code>&lt;remote&gt;:~/.bashrc</code> file.</li>
+</ul>
+<blockquote>
+<p>Excute just when run this script.</p>
+</blockquote>
 <p>See details in <a href="///D://aMyProj/tools/dockerimages/work/.sh/sync.sh"><code>.sh/sync.sh</code></a></p>
 <h2 id="detail">Detail<a class="headerlink" href="#detail" title="Permanent link"></a></h2>
 <h3 id="ssh-keychain">SSH Keychain<a class="headerlink" href="#ssh-keychain" title="Permanent link"></a></h3>
