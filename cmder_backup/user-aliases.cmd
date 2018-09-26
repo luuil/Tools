@@ -21,7 +21,7 @@ l=ls -alh --color $*
 
 
 ;= rem docker
-dk=bash "%CMDER_ROOT%\docker.sh" $*
+dk=bash "%CMDER_ROOT%\config\docker.sh" $*
 
 ;= rem sublime
 sbl="C:\Program Files\Sublime Text 3\subl.exe" $*
@@ -42,6 +42,7 @@ ckbindeps="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tool
 gc=git add . & git commit -m $*
 gs=git status
 gp=git push
+gd=git diff $*
 gl=git log --oneline --all --graph --decorate  $*
 
 
