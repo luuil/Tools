@@ -2,7 +2,7 @@
 
 function sync() {
   printf "[$1]: syncing...\n"
-  rsync --exclude sync.sh -r . $1:~/.sh
+  rsync --exclude='~/.sh/sync.sh' -r ~/.sh/ $1:~/.sh
   alter_or_not=`ssh $1 "cat ~/.bashrc | grep bashrc_append"`
   if [ -n "$alter_or_not" ]; then
     printf "[$1]: synced already\n\n"

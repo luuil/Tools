@@ -1,5 +1,7 @@
 ## Docker image
 
+Before build, put your own `Identity` and `Identity.pub` file into `.ssh/` directory first.
+
 ### Build the image
 
 ```bash
