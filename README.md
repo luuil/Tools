@@ -11,7 +11,7 @@
 
 
 [as]: ./audio_segment
-[tfsm]: ./tf_saved_model
+[tfsm]: ./tf_saved_models
 [cmder-bk]: ./cmder_backup
 [dkf]: ./dockerimages
 [gsid]: ./gok_skill_image_download
