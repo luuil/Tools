@@ -3,7 +3,7 @@
 
 | Name                   | Description                                                        |
 |------------------------|--------------------------------------------------------------------|
-| [Hexo config backup][hexo-bk] | Config file backup for [Cmder][cmder].     |
+| [Hexo config backup][hexo-bk] | Config file backup for [Hexo][hexo].     |
 | [Cmder config backup][cmder-bk] | Config file backup for [Cmder][cmder].     |
 
 
