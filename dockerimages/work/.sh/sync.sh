@@ -2,7 +2,7 @@
 
 function sync() {
   printf "[$1]: syncing...\n"
-  rsync -azP --exclude='~/.sh/sync.sh' ~/.sh/ $1:~/.sh
+  rsync -azP --exclude='~/.sh/sync.sh' --exclude='~/.sh/deploy.model.sh' ~/.sh/ $1:~/.sh
   alter_or_not=`ssh -t $1 "cat ~/.bashrc | grep bashrc_append"`
   if [ -n "$alter_or_not" ]; then
     printf "[$1]: synced already\n\n"
@@ -21,3 +21,12 @@ sync gwk
 sync cwk
 sync ti1
 sync ti2
+
+sync gsz1
+sync gsz2
+sync gsz3
+sync gsz4
+sync gsh1
+sync gsh2
+sync gsh3
+sync gsh4

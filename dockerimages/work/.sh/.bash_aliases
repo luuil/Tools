@@ -59,6 +59,7 @@ alias dk='~/.sh/docker.sh'
 alias q=exit
 alias n=nvidia-smi
 alias wn='watch nvidia-smi'
+alias cht='~/.sh/cht.sh'
 
 # typo
 alias snv='svn'
