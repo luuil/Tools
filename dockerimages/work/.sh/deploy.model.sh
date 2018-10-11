@@ -6,7 +6,8 @@ function sync() {
   printf "\n"
 }
 
-model_version=20
+# version number, integer
+model_version=$1
 
 sync gsz1 $model_version
 sync gsz2 $model_version
