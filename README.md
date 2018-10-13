@@ -8,6 +8,7 @@
 | [Backups(personal use)][bk] | Config files backup.     |
 | [Docker images][dkf] | [Docker][dk] files which can be used to create Docker images.     |
 | [GOK skill image downloader][gsid] | Download the [Glory of King(GoK)][gok]'s skill images.   |
+| [svg2png][svg2png] | Convert SVG files to PNG based on [svgexport][svgexport].     |
 
 
 [as]: ./audio_segment
@@ -15,6 +16,8 @@
 [bk]: ./backups
 [dkf]: ./dockerimages
 [gsid]: ./gok_skill_image_download
+[svg2png]: ./svg2png
 
 [dk]: https://docker.com/
 [gok]: http://pvp.qq.com/web201605/herolist.shtml
+[svgexport]: https://github.com/shakiba/svgexport
