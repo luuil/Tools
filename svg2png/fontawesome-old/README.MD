@@ -1,0 +1,1 @@
+from [https://www.flaticon.com/packs/font-awesome](https://www.flaticon.com/packs/font-awesome)
