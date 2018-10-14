@@ -1,0 +1,8 @@
+{
+  // "Python.tmpl" for example.
+  "custom_template_header_path": "D:/aMyProj/tools/backups/sublime/configs/fileheader/headertmpl",
+  "Default": {
+    "email": "luuil@outlook.com",
+    "author": "Luuil"
+  }
+}

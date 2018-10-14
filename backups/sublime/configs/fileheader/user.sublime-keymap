@@ -1,0 +1,16 @@
+[
+    {
+        "keys": ["ctrl+shift+n"],
+        "command": "file_header_new_file",
+        "args":{
+            "paths": []
+        }
+    },
+    {
+        "keys": ["ctrl+shift+h"],
+        "command": "file_header_add_header",
+        "args":{
+            "paths": []
+        }
+    }
+]
