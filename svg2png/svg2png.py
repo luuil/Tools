@@ -11,7 +11,8 @@ import logging
 import argparse as Args
 
 # set target default size to 32:?
-CONVERT_ONE = "svgexport {svg} {png} 32:"
+# modify it follow the svgexport usage if you want
+CONVERT_ONE = "svgexport {svg} {png} 24:"
 
 
 def set_logger(name):

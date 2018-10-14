@@ -22,6 +22,7 @@ Then run `svg2png.py`
     python svg2png.py -d <input_dir> [-o output_dir]
     ```
 
+> Modify line 15 of `svg2png.py` follow the svgexport usage if you want.
 
 For example
 
