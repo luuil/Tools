@@ -14,7 +14,7 @@ model_version=$1
 # sync to 10.68.50.181 from local first,
 # then sync to other machines from 10.68.50.181
 
-# sync 10.68.50.181 $model_version
+sync 10.68.50.181 $model_version
 sync 10.68.50.180 $model_version
 sync 10.68.50.184 $model_version
 sync 10.68.50.186 $model_version

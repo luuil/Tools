@@ -156,8 +156,9 @@ site_state: true
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  GitHub: https://github.com/luuil || github
+  GitHub: https://github.com/luuil/ || github
   E-Mail: mailto:luuil@outlook.com || envelope
+  Linkedin: https://www.linkedin.com/in/lu-l-288a6184/ || linkedin
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -195,7 +196,7 @@ avatar:
   # in theme directory(source/images): /images/avatar.gif
   # in site  directory(source/uploads): /uploads/avatar.gif
   # You can also use other linking images.
-  url: /avatar.gif #/images/avatar.gif
+  url: /chai.jpg #/images/avatar.gif
   # If true, the avatar would be dispalyed in circle.
   rounded: false
   # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.
@@ -555,14 +556,14 @@ needmoreshare2:
       iconStyle: box
       boxForm: horizontal
       position: bottomCenter
-      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin
   float:
     enable: false
     options:
       iconStyle: box
       boxForm: horizontal
       position: middleRight
-      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook,Linkedin
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
