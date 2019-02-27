@@ -19,8 +19,8 @@ function sync() {
 
 # local: 2
 
-sync ti1
-sync ti2
+#sync ti1
+#sync ti2
 
 # nolan: 2
 
@@ -32,21 +32,23 @@ sync nl2
 sync gwkt
 sync cwkt
 
-# shenzhen gpu: 5
+# shenzhen gpu: 6
 
 sync gsz1
 sync gsz2
 sync gsz3
 sync gsz4
 sync gsz5
+sync gsz6
 
-# shanghai gpu: 5
+# shanghai gpu: 6
 
 sync gsh1
 sync gsh2
 sync gsh3
 sync gsh4
 sync gsh5
+sync gsh6
 
 # shenzhen cpu: 14
 
