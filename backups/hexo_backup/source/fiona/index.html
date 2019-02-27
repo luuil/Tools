@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>你好啊，Fiona！</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="./css/swiper.min.css">
+  <link rel="stylesheet" href="./css/default.css">
+
+  <!-- JQuery -->
+  <!-- <script type="text/javascript" src="./js/jquery.js"></script> -->
+  
+  <!-- Clock -->
+  <script type="text/javascript" src="./js/clock.js"></script>
+  
+  <!-- Bubbles -->
+  <script type="text/javascript" src="./js/bubbles.js"></script>
+  <!-- <script type="text/javascript" src="./js/color-0.1.3.min.js"></script> -->
+  <!-- <script type="text/javascript" src="./js/canvas-balloon.js"></script> -->
+
+</head>
+<body>
+  <!-- Container Swiper -->
+  <div class="swiper-container container-swiper-container">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <div style="display: block;">
+          在一起
+          <div id="clock">
+            <span class="digit">17</span> 天
+            <span class="digit">17</span> 时
+            <span class="digit">17</span> 分
+            <span class="digit">17</span> 秒
+          </div>
+        </div>
+        <canvas id='bubbles' style='position: fixed; z-index: 1; width: 100%; height: 100%'></canvas>
+      </div> <!-- swiper-slide -->
+
+      <div class="swiper-slide">
+        <a class="text" href="./happybirtday.html">生日快乐鸭！</a>
+      </div> <!-- swiper-slide -->
+
+    </div> <!-- swiper-wrapper end -->
+
+    <!-- Add Pagination -->
+    <div class="swiper-pagination container-swiper-pagination"></div>
+
+  </div>
+  <!-- Container Swiper end -->
+
+  <!-- Swiper JS -->
+  <script type="text/javascript" src="./js/swiper.min.js"></script>
+  <!-- Initialize Swiper -->
+  <script>
+    var swiperContainer = new Swiper('.container-swiper-container', {
+      direction: 'vertical',
+      slidesPerView: 1,
+      spaceBetween: 30,
+      mousewheel: true,
+      pagination: {
+        el: '.container-swiper-pagination',
+        clickable: true,
+      },
+    });
+  </script>
+
+  <!-- Heart Bubbles -->
+  <script>
+    new HeartBubbles('bubbles');
+    // new Balloons('bubbles')
+  </script>
+
+  <!-- Clock -->
+  <script type="text/javascript">
+    const COUNT_DOWN = false
+    const TOGETHER   = "Nov 17, 2018 17:17:17";
+    const TTL        = "Oct 17, 2117 17:17:17";
+    const BIRTH      = "Dec 17, 1994 07:17:17"; // 清晨
+    new Clock('clock', TOGETHER, TTL, COUNT_DOWN);
+  </script>
+
+</body>
+</html>
