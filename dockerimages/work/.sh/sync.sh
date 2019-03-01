@@ -17,10 +17,11 @@ function sync() {
 # ssh-copy-id -i ~/.ssh/id_rsa.pub ti2
 
 
-# local: 2
+# local: 3
 
-#sync ti1
-#sync ti2
+sync ti1
+sync ti2
+sync 1060
 
 # nolan: 2
 
