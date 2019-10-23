@@ -1,0 +1,77 @@
+version: 1
+disable_existing_loggers: false
+
+
+formatters:
+    standard:
+        format: "%(asctime)s - %(name)s - %(levelname)s - %(filename)s - %(lineno)d - %(message)s"
+    error:
+        format: "%(asctime)s.%(process)d.%(processName)s - %(name)s - %(levelname)s - %(filename)s - %(lineno)d - %(message)s"
+    standard_json:
+        format: '{"time":"%(asctime)s","process":"%(process)d","logger":"%(name)s","level":"%(levelname)s","file":"%(filename)s","lineno":%(lineno)d,"msg":"%(message)s"}'
+    error_json:
+        format: '{"time":"%(asctime)s","process":"%(process)d","logger":"%(name)s","level":"%(levelname)s","file":"%(filename)s","lineno":%(lineno)d,"msg":"%(message)s"}'
+
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: standard
+        stream: ext://sys.stdout
+
+    info_file_handler:
+        class: cloghandler.ConcurrentRotatingFileHandler
+        level: INFO
+        formatter: standard
+        filename: logs/app.log
+        maxBytes: 1048576000 # 10MB*100
+        backupCount: 5
+        encoding: utf8
+
+    error_file_handler:
+        class: cloghandler.ConcurrentRotatingFileHandler
+        level: ERROR
+        formatter: error
+        filename: logs/app.error.log
+        maxBytes: 1048576000 # 10MB*100
+        backupCount: 5
+        encoding: utf8
+
+    debug_file_handler:
+        class: cloghandler.ConcurrentRotatingFileHandler
+        level: DEBUG
+        formatter: standard
+        filename: logs/app.debug.log
+        maxBytes: 1048576000 # 10MB*100
+        backupCount: 5
+        encoding: utf8
+
+    critical_file_handler:
+        class: cloghandler.ConcurrentRotatingFileHandler
+        level: CRITICAL
+        formatter: standard
+        filename: logs/app.critical.log
+        maxBytes: 1048576000 # 10MB*100
+        backupCount: 5
+        encoding: utf8
+
+    warn_file_handler:
+        class: cloghandler.ConcurrentRotatingFileHandler
+        level: WARN
+        formatter: standard
+        filename: logs/app.warn.log
+        maxBytes: 1048576000 # 10MB*100
+        backupCount: 5
+        encoding: utf8
+
+root:
+    level: DEBUG
+    handlers: []
+    propagate: yes
+
+loggers:
+    aibeauty:
+        level: INFO
+        handlers: [info_file_handler, error_file_handler]
+        propagate: no
