@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 usage() {
     echo 'avi2mp4 video_path [[video_path2]...]'
 }
@@ -13,8 +13,7 @@ if [ $# -eq 0 ]; then
 else  # support more than one to be convert
     set -x # echo on
 
-    for path in "$@"
-    do
+    for path in "$@"; do
         convert_one $path
     done
 
