@@ -21,7 +21,7 @@ def merge_video():
     videos = [os.path.join(vpath, v) for v in videos]
     vmisc.merge_videos(
         videos,
-        fr'{vpath}/.mp4',
+        fr'{vpath}/merge.mp4',
         texts=titles,
         grid_size=(2, 2),
         loc_scale=(.3, .95),
