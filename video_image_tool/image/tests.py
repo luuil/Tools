@@ -16,10 +16,10 @@ sys.path.append('..')
 
 
 def test_merge_images_dir():
-    path, out = r"../data/image", r"../data/merge.png"
+    path, out = r"../data/image", r"../data/merge.jpg"
     images = imisc.list_images(path)
     names = [os.path.basename(f)[:-4] for f in images]
-    imisc.merge_images(images, out, titles=names, loc_scale=(.5, .9), color=(255, 0, 0))
+    imisc.merge_images(images, out, show=False, titles=names, loc_scale=(.1, .1), color=(0, 0, 255))
 
 
 if __name__ == '__main__':

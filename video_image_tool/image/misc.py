@@ -105,7 +105,7 @@ def covert_pil_to_cv_image(image):
     return cv2.cvtColor(pil_arr, cv2.COLOR_RGB2BGR)
 
 
-def merge_images(images_in, image_out, *args, **kwargs):
+def merge_images(images_in, image_out, *args, show=False, **kwargs):
     images = []
     for v in images_in:
         images.append(read_by_cv(v))
@@ -113,6 +113,9 @@ def merge_images(images_in, image_out, *args, **kwargs):
     least_size = sorted([(img.shape[0], img.shape[1]) for img in images])[0]  # get least size WH
     images = np.array([cv2.resize(img, least_size) for img in images])  # resize to same size WH
     grid = create_image_grid(images, *args, **kwargs)
+    if show:
+        cv2.imshow('x', grid)
+        cv2.waitKey(0)
     cv2.imwrite(image_out, grid)
 
 
