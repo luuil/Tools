@@ -115,3 +115,4 @@ l*.ckpt.*
 *.png
 vggish_model.ckpt
 deprecated*
+.idea/
