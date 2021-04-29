@@ -110,7 +110,7 @@ def merge_images(images_in, image_out, *args, show=False, **kwargs):
     for v in images_in:
         images.append(read_by_cv(v))
 
-    least_size = sorted([(img.shape[0], img.shape[1]) for img in images])[0]  # get least size WH
+    least_size = sorted([img.shape[0:2] for img in images])[0]  # get least size WH
     images = np.array([cv2.resize(img, least_size) for img in images])  # resize to same size WH
     grid = create_image_grid(images, *args, **kwargs)
     if show:
