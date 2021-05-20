@@ -57,7 +57,7 @@ class ExtractFromVideo(object):
 
         self._vc.set(cv2.CAP_PROP_POS_FRAMES, self._start)
 
-    def extract(self, path=None, bgr2rgb=False, target_size=None, text=None, loc_scale=None):
+    def extract(self, path=None, bgr2rgb=False, target_size=None, text=None, text_location=None):
         if path is not None and not os.path.exists(path):
             os.makedirs(path)
 
@@ -77,8 +77,9 @@ class ExtractFromVideo(object):
                 assert isinstance(target_size, (list, tuple))
                 frame = cv2.resize(frame, tuple(target_size))
             if text is not None:
-                if loc_scale is not None:
-                    w_scale, h_scale = loc_scale
+                if text_location is not None:
+                    w_scale, h_scale = text_location
+                    assert 0 <= w_scale <= 1.0 and 0 <= h_scale <= 1.0, "value range should be in [0.0, 1.0]"
                 else:
                     w_scale, h_scale = 1 / 10, 1 / 10
                 pos = int(self.size[0] * w_scale), int(self.size[1] * h_scale)  # text position

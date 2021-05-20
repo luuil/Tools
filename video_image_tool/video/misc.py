@@ -14,7 +14,7 @@ from video_image_tool.video.extractvideo import ExtractFromVideo
 import video_image_tool.image.misc as imisc
 
 
-def merge_videos(videos_in, video_out, texts=None, grid_size=None, nframes: int = None, loc_scale=None):
+def merge_videos(videos_in, video_out, texts=None, grid_size=None, nframes: int = None, text_location=None):
     if texts is None:
         texts = [None] * len(videos_in)
     assert len(videos_in) == len(texts)
@@ -34,7 +34,7 @@ def merge_videos(videos_in, video_out, texts=None, grid_size=None, nframes: int 
         least_frames = sorted([e.total_frames for e, _t in video_handles])[0]  # all with same number of frames
 
     least_size = sorted([e.size for e, _t in video_handles])[0]  # all with same size WH
-    generators = [e.extract(text=t, loc_scale=loc_scale) for e, t in video_handles]
+    generators = [e.extract(text=t, text_location=text_location) for e, t in video_handles]
 
     # read one frame and resize for each generator, then get the output video size
     cur_frames = np.array([cv2.resize(next(g), least_size) for g in generators])

@@ -16,10 +16,16 @@ sys.path.append('..')
 
 
 def test_merge_images_dir():
-    path, out = r"../data/image", r"../data/merge.jpg"
+    path = r"\\HUYA-LUUIL\liulu-results\cartoon_controllable\20210427\fake3d\xx"
+    out = fr"{path}/merge.jpg"
     images = imisc.list_images(path)
     names = [os.path.basename(f)[:-4] for f in images]
-    imisc.merge_images(images, out, show=False, titles=names, loc_scale=(.1, .1), color=(0, 0, 255))
+    imisc.merge_images(images, out,
+                       show=False,
+                       titles=names,
+                       text_location=(.1, .1),
+                       color=(0, 0, 255),
+                       grid_size=(1, 3),)
 
 
 if __name__ == '__main__':

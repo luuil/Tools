@@ -5,7 +5,7 @@
 """
 Miscellaneous utility functions for image operations.
 """
-
+from typing import Any, Callable, Tuple
 import os
 import numpy as np
 import cv2
@@ -34,10 +34,23 @@ def adjust_dynamic_range(data, drange_in, drange_out):
     return data
 
 
-def create_image_grid(images, *args, grid_size=None, titles=None, loc_scale=None, color=None, **kwargs):
+def create_image_grid(images: np.ndarray, *args, **kwargs):
+    def _parse_key(key: str, default: Any, func: Callable = lambda x: x):
+        value = func(kwargs[key]) if key in kwargs else default
+        return value
+
+    def _parse_kwargs() -> Tuple:
+        grid_size = _parse_key('grid_size', default=None)
+        titles = _parse_key('titles', default=None)
+        text_location = _parse_key('text_location', default=(0.3, 0.3))
+        color = _parse_key('color', default=(255, 0, 0))
+        return grid_size, titles, text_location, color
+
     _args, _kwargs = args, kwargs
     assert images.ndim == 3 or images.ndim == 4
-    num, img_w, img_h = images.shape[0], images.shape[-2], images.shape[-3]
+    num, img_w, img_h = images.shape[0], images.shape[2], images.shape[1]
+
+    grid_size, titles, text_location, color = _parse_kwargs()
 
     if grid_size is not None:
         grid_h, grid_w = tuple(grid_size)
@@ -48,20 +61,15 @@ def create_image_grid(images, *args, grid_size=None, titles=None, loc_scale=None
     if titles is not None:
         assert len(images) == len(titles)
         assert all([isinstance(t, str) for t in titles])
-
-        if loc_scale is not None:
-            w_scale, h_scale = loc_scale
-        else:
-            w_scale, h_scale = 1 / 3, 1 / 3
-
-        if color is None:
-            color = (255, 0, 0)
-
+        w_scale, h_scale = text_location
+        assert 0 <= w_scale <= 1.0 and 0 <= h_scale <= 1.0, "Location value range should be in [0.0, 1.0]"
         for title, image in zip(titles, images):
             org = int(img_w * w_scale), int(img_h * h_scale)
             cv2.putText(image, title, org, cv2.FONT_HERSHEY_SIMPLEX, 1, color, 1)
 
-    grid = np.zeros([grid_h * img_h, grid_w * img_w] + list(images.shape[-1:]), dtype=images.dtype)
+    grid_shape = [grid_h * img_h, grid_w * img_w] if images.ndim == 3 \
+        else [grid_h * img_h, grid_w * img_w, images.shape[3]]
+    grid = np.zeros(grid_shape, dtype=images.dtype)
     for idx in range(num):
         x = (idx % grid_w) * img_w
         y = (idx // grid_w) * img_h
