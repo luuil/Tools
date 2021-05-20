@@ -10,7 +10,7 @@ import os
 import cv2
 
 
-class ExtractFromVideo(object):
+class VideoReader(object):
     def __init__(self, path, frame_range=None, debug=False):
         assert os.path.exists(path)
 
@@ -92,7 +92,7 @@ class ExtractFromVideo(object):
 
 
 if __name__ == "__main__":
-    e = ExtractFromVideo("/workspace/data/liulu/20190722_hr_IMG_6886_full.mp4", (15200, 15600), debug=True)
+    e = VideoReader("/workspace/data/liulu/20190722_hr_IMG_6886_full.mp4", (15200, 15600), debug=True)
 
     e.set_frames_range((100, 102))
     for image in e.extract("../extract_images"):
