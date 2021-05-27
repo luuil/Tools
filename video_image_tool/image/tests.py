@@ -5,7 +5,6 @@
 """
 test image related operations.
 """
-import logging
 import os
 import sys
 
@@ -28,7 +27,7 @@ def test_merge_images_dir():
 
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s|%(levelname)s|%(filename)s@%(funcName)s(%(lineno)d): %(message)s'
-    logging.basicConfig(format=log_fmt, level=logging.DEBUG)
+    from video_image_tool import util
+    util.set_default_logging()
 
     test_merge_images_dir()

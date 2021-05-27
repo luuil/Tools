@@ -93,8 +93,8 @@ class VideoReader(object):
 
 
 if __name__ == "__main__":
-    log_fmt = '%(asctime)s|%(levelname)s|%(filename)s@%(funcName)s(%(lineno)d): %(message)s'
-    logging.basicConfig(format=log_fmt, level=logging.DEBUG)
+    from video_image_tool import util
+    util.set_default_logging()
 
     e = VideoReader("../data/video/x.mp4", (5, 10), debug=True)
 
