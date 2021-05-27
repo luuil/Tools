@@ -7,8 +7,11 @@ Miscellaneous utility functions for video operations.
 """
 import logging
 import os
+from typing import Union, List
+
 import cv2
 import numpy as np
+from moviepy.editor import ImageSequenceClip
 
 from video_image_tool.video.video_reader import VideoReader
 import video_image_tool.image.misc as imisc
@@ -84,3 +87,20 @@ def concatenate_videos(videos_in, video_out, texts=None, text_location=None):
 
     video_writer.release()
     logging.info(f'Writing done: {video_out}')
+
+
+def create_video(images: Union[np.ndarray, List[str]], video_out: str, fps=None, ismask=False):
+    if isinstance(images, list):
+        flag_load_image = True
+    else:
+        assert images.ndim == 3 or images.ndim == 4, f'only support 3 or 4 dimension inputs, now: {images.ndim}'
+        flag_load_image = False
+
+    logging.info(f'num of images to create video: {len(images)}')
+    try:
+        clip = ImageSequenceClip(images, fps=fps, ismask=ismask, load_images=flag_load_image)
+        clip.write_videofile(video_out)
+        clip.close()
+    except Exception as e:
+        logging.error(e)
+    logging.info(f'saved video successful: {video_out}')
