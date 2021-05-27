@@ -10,6 +10,7 @@ import os
 
 import video_image_tool.video.misc as vmisc
 import video_image_tool.image.misc as imisc
+from video_image_tool import util
 
 
 def create_videos():
@@ -94,8 +95,7 @@ def merge_video():
 
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s|%(levelname)s|%(filename)s@%(funcName)s(%(lineno)d): %(message)s'
-    logging.basicConfig(format=log_fmt, level=logging.DEBUG)
+    util.set_default_logging()
 
     # merge_video()
     concatenate_live2d_videos()

@@ -10,6 +10,7 @@ import os
 import sys
 
 import video_image_tool.image.misc as imisc
+from video_image_tool import util
 
 sys.path.append('.')
 sys.path.append('..')
@@ -28,4 +29,6 @@ def test_merge_images_dir():
 
 
 if __name__ == '__main__':
+    util.set_default_logging()
+
     test_merge_images_dir()
