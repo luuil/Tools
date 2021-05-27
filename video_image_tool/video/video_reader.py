@@ -5,17 +5,18 @@
 """
 Extract images from video by OpenCV.
 """
-
+import logging
 import os
 import cv2
 
 
 class VideoReader(object):
     def __init__(self, path, frame_range=None, debug=False):
-        assert os.path.exists(path)
+        self._vc = None
 
-        self._p = path
-        self._vc = cv2.VideoCapture(self._p)
+        assert os.path.exists(path), f'not exists: {path}'
+        vc = cv2.VideoCapture(path)
+        self._vc = vc
 
         self.size = int(self._vc.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self._vc.get(cv2.CAP_PROP_FRAME_HEIGHT))
         self.fps = int(self._vc.get(cv2.CAP_PROP_FPS))
@@ -30,7 +31,7 @@ class VideoReader(object):
             self.set_frames_range(frame_range)
 
         if self._debug:
-            print(f"video size( W x H ) : {self.size[0]} x {self.size[1]}")
+            logging.debug(f"video size( W x H ) : {self.size[0]} x {self.size[1]}")
 
     def __del__(self):
         self.release()
@@ -64,10 +65,10 @@ class VideoReader(object):
         for i in range(0, self._count):
             success, frame = self._vc.read()
             if not success:
-                print(f"index {i} exceeded.")
+                logging.debug(f"index {i} exceeded.")
                 break
             if self._debug:
-                print(f"frame {self._start + i}")
+                logging.debug(f"frame {self._start + i}")
             if path is not None:
                 cv2.imwrite(os.path.join(path, f"{self._start + i}.jpg"), frame)
             if bgr2rgb:
@@ -92,12 +93,15 @@ class VideoReader(object):
 
 
 if __name__ == "__main__":
-    e = VideoReader("/workspace/data/liulu/20190722_hr_IMG_6886_full.mp4", (15200, 15600), debug=True)
+    log_fmt = '%(asctime)s|%(levelname)s|%(filename)s@%(funcName)s(%(lineno)d): %(message)s'
+    logging.basicConfig(format=log_fmt, level=logging.DEBUG)
 
-    e.set_frames_range((100, 102))
+    e = VideoReader("../data/video/x.mp4", (5, 10), debug=True)
+
+    e.set_frames_range((1, 3))
     for image in e.extract("../extract_images"):
-        print(f"{image is not None}: {image.shape}")
+        logging.info(f"{image is not None}: {image.shape}")
 
-    e.set_frames_range((1000, 1002))
+    e.set_frames_range((3, 4))
     for image in e.extract():
-        print(f"{image is not None}: {image.shape}")
+        logging.info(f"{image is not None}: {image.shape}")
