@@ -84,7 +84,7 @@ class VideoReader(object):
                 else:
                     w_scale, h_scale = 1 / 10, 1 / 10
                 pos = int(self.size[0] * w_scale), int(self.size[1] * h_scale)  # text position
-                frame = cv2.putText(frame, text, pos, cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255), thickness=2)
+                frame = cv2.putText(frame, text, pos, cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 255), thickness=1)
             yield frame
 
     def release(self):

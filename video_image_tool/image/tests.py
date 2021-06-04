@@ -6,6 +6,7 @@
 test image related operations.
 """
 
+import logging
 import os
 import sys
 
@@ -28,7 +29,22 @@ def test_merge_images_dir():
                        color=(0, 0, 255))
 
 
+def concatenate_images():
+    material_dir = r"G:\projects\0results\cartoon_controllable\20210604\materials\mengmei\res_all\00016"
+
+    for scenery in os.listdir(material_dir):
+        images = list()
+        for expression in os.listdir(os.path.join(material_dir, scenery)):
+            src_dir = os.path.join(material_dir, scenery, expression, "frames")
+            images += imisc.list_images(src_dir)
+        out = os.path.join(material_dir, scenery, "sprite.png")
+        imisc.merge_images(images, out, show=False)
+
+
 if __name__ == '__main__':
     util.set_default_logging()
 
-    test_merge_images_dir()
+    # test_merge_images_dir()
+    concatenate_images()
+
+

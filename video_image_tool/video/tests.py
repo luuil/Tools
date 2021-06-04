@@ -68,26 +68,29 @@ def concatenate_live2d_videos():
 def merge_video():
     vpath2 = r'\\huya-luuil\liulu-results\cartoon_controllable\20210521\fake3d'
     vpath2 = r'G:\projects\image_translation\cartoon_controllable\talking-head-anime-2-demo\data\output\hongyu\output_symbol_test_holebody'
+    vpath2 = r'\\huya-luuil\liulu-results\cartoon_controllable\20210604\release_alpha'
     videos = [
-        '00000_concatenate.mp4',
-        '00000_sticker_cat.mp4',
-        '00002.mp4',
-        '00003.mp4',
+        'mengmei00016_v0.2.1_changtai.mp4',
+        'mengmei00016_v0.2.1_baogou.mp4',
+        'mengmei00016_v0.2.1_jianpan.mp4',
+        'banshen00006_v0.1.0.mp4',
+        'banshen00001_v0.1.0.mp4',
+        'banshen00004_v0.1.0.mp4',
     ]
-    # titles = [name[:-4] for name in videos]
-    titles = [
-        'video1_v0.0.4',
-        'video2_v0.0.4',
-        'video3_v0.0.4',
-        'video4_v0.0.4',
-    ]
+    titles = [name[:-10] for name in videos]
+    # titles = [
+    #     'video1_v0.0.4',
+    #     'video2_v0.0.4',
+    #     'video3_v0.0.4',
+    #     'video4_v0.0.4',
+    # ]
     videos = [os.path.join(vpath2, v) for v in videos]
     vmisc.merge_videos(
         videos,
-        fr'{vpath2}/v0.0.4.mp4',
+        fr'{vpath2}/release_alpha.mp4',
         texts=titles,
         # grid_size=(1, len(videos)),
-        grid_size=(2, 2),
+        grid_size=(2, 3),
         # text_location=(0, .95),
         text_location=(0, .1),
         nframes=None
@@ -97,7 +100,7 @@ def merge_video():
 if __name__ == '__main__':
     util.set_default_logging()
 
-    # merge_video()
-    concatenate_live2d_videos()
+    merge_video()
+    # concatenate_live2d_videos()
     # create_videos()
     pass
