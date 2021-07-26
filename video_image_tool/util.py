@@ -3,6 +3,7 @@
 import os
 import logging
 import enum
+import json
 
 LOGGING_FORMAT = '%(asctime)s|%(levelname)s|%(filename)s@%(funcName)s(%(lineno)d): %(message)s'
 
@@ -34,3 +35,10 @@ def files_under(path: str, mode=0):
     names = os.listdir(path)
     files = [path_join(path, name) for name in names if cond(path_join(path, name))]
     return files
+
+
+def json_load(path: str) -> dict:
+    if not os.path.exists(path):
+        return dict()
+    with open(path, 'r') as f:
+        return json.load(f)

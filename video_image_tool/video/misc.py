@@ -89,7 +89,7 @@ def concatenate_videos(videos_in, video_out, texts=None, text_location=None):
     logging.info(f'Writing done: {video_out}')
 
 
-def create_video(images: Union[np.ndarray, List[str]], video_out: str, fps=None, ismask=False):
+def create_video(images: Union[np.ndarray, List[str]], video_out: str, fps=16, ismask=False, withmask=False):
     if isinstance(images, list):
         flag_load_image = True
     else:
@@ -98,7 +98,7 @@ def create_video(images: Union[np.ndarray, List[str]], video_out: str, fps=None,
 
     logging.info(f'num of images to create video: {len(images)}')
     try:
-        clip = ImageSequenceClip(images, fps=fps, ismask=ismask, load_images=flag_load_image)
+        clip = ImageSequenceClip(images, fps=fps, with_mask=withmask, ismask=ismask, load_images=flag_load_image)
         clip.write_videofile(video_out)
         clip.close()
     except Exception as e:
